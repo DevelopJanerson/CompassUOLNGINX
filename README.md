@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/bcf1aef6-654e-46fc-904d-5c8ea3ce72fa)
+![image](https://github.com/user-attachments/assets/5a6b37b1-448e-4eab-8d3b-58150ace08dd)
 # Projeto de Monitoramento de uma instância EC2 na AWS - Compass.UOL
 
 ## Objetivo
