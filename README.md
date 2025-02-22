@@ -61,15 +61,16 @@ Nesta seção, apresentamos algumas capturas de tela que demonstram o funcioname
 
 ### Página no Navegador
 
-![Imagem Navegador](https://github.com/user-attachments/assets/12d21ecb-8569-41ff-b620-25ff80f4135d)
+![Imagem Navegador](https://github.com/user-attachments/assets/e497bea0-237d-4158-b0e4-d2ce6a009caf)
 
 
 ### Logs do Terminal
 Nesta próxima imagem, primeiramente mostro os logs de monitoramento que certificam que o site está online. Após isso, paro o servidor propositalmente com o comando "sudo systemctl stop nginx". Perceba que, na segunda vez em que mostro os logs de monitoramento, o site fica offline e reinicia automaticamente, sem que seja necessário executar qualquer outro comando no terminal.
 
-![Imagem Terminal](https://github.com/user-attachments/assets/f34ba610-dea6-4c74-a637-b6618fa98d4c)
+![Imagem Terminal](https://github.com/user-attachments/assets/5f58de0b-c4a5-43a6-ac5e-6f7462ab21a9)
 
 
 ### Notificação do Discord
 
-![Imagem Discord](https://github.com/user-attachments/assets/ce729704-0576-488f-8250-963cab02b15f)
+![Imagem Discord](https://github.com/user-attachments/assets/719308da-b8c6-48d7-91eb-c22ef3f05546)
+
