@@ -1,0 +1,136 @@
+#!/bin/bash
+# NGIMX
+apt upgrade -y 
+apt install nginx -y 
+systemctl enable nginx --now
+
+#INDEX.HTML
+cat << 'EOF'> /var/www/html/index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        ul {
+            color: #666;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compass Project</h1>
+        <h2>Descrição do Projeto</h2>
+        <p>Neste projeto, proposto pela Compass UOL, a proposta é a criação de um servidor WEB com monitoramento automatizado.</p>
+        <h3>Projeto proposto a equipe do Programa de Bolsas DevSecOps e AWS de 2025</h3>
+
+        <h2>Tecnologias Visadas na Utilização</h2>
+        <ul>
+            <li>Instâncias EC2</li>
+            <li>VPC</li>
+            <li>Security Groups</li>
+            <li>NGinx como gerenciador de página WEB</li>
+            <li>Linguagem de Marcação de Hipertexto (HTML)</li>
+            <li>Linux</li>
+            <li>Conexão SSH</li>
+            <li>Protocolo HTTP</li>
+            <li>Script em Bash ou Python</li>
+            <li>CRON</li>
+            <li>Telegram/Discord ou Slack para recebimento de aviso com relação a mal funcionamento ou parada do site</li>
+            <li>Git/GitHub para documentação e anotação do processo e seu andamento</li>
+        </ul>
+    </div>
+<h2> <p id="hostname"></p> </h2>
+
+<script>
+let host = location.host;
+document.getElementById("hostname").innerHTML = host;
+</script>
+</body>
+</html>
+EOF
+
+# Script de Monitoramento
+
+cat > /usr/local/bin/restart_nginx.sh << 'EOF'
+#!/bin/bash
+# URL do site 
+#URL="http://hostname" 
+sleep 30
+URL=$(curl -s http://checkip.amazonaws.com)
+
+# URL do Webhook do Discord
+WEBHOOK_URL="https://discord.com/api/webhooks/1341076582688882718/DzTZzV5fP9l8SZKzTJjwlcnB9xXpKWI5tFR2IevwlXWAjL1gnsINkzL7M6WDQTWKjhIp"
+ 
+# Faz uma requisição HTTP ao site
+if curl --output /dev/null --silent --head --fail "$URL" > /dev/null 2>&1; then
+    echo "Site está online: $URL" 
+
+    # Envia notificação para o Discord
+    curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Alerta: O site $URL está online!\"}" $WEBHOOK_URL > /dev/null 2>&1
+else
+    echo "$(date): Site está offline: $URL" >> /var/log/nginx_monitor.log
+    systemctl restart nginx
+
+    # Envia notificação para o Discord
+    curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Alerta: O site $URL está offline!\"}" $WEBHOOK_URL > /dev/null 2>&1
+fi
+EOF
+chmod +x /usr/local/bin/restart_nginx.sh
+
+#Serviço do systemd
+cat > /etc/systemd/system/restart_nginx.service << 'EOF'
+[Unit]
+Description=Monitoramento e reinicialização automática do Nginx
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/restart_nginx.sh
+User=root
+StandardOutput=append:/var/log/nginx_monitor.log
+StandardError=append:/var/log/nginx_monitor.log
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#Timer do systemd
+cat > /etc/systemd/system/restart_nginx.timer << 'EOF'
+[Unit]
+Description=Executa o monitoramento do Nginx a cada minuto
+
+[Timer]
+OnActiveSec=1min
+OnUnitActiveSec=1min
+Unit=restart_nginx.service
+
+[Install]
+WantedBy=timers.target
+EOF
+systemctl daemon-reload
+systemctl enable restart_nginx.timer
+systemctl start restart_nginx.timer
+
+echo "Instalação e configuração do NGINX concluídas com sucesso!"
+
