@@ -37,7 +37,7 @@ A arquitetura foi implantada usando instâncias [EC2](https://docs.aws.amazon.co
 - **Página de Informações**: Uma página HTML que exibe informações sobre o projeto, incluindo o hostname do servidor.
 
 ## Instalação
-Para implementar a arquitetura na plataforma da AWS, execute o `script_monitoramento_nginx` através do user-data.
+Para implementar a arquitetura na plataforma da AWS, quando estiver criando uma instância, execute o `script_monitoramento_nginx` através do user-data.
 O `script_monitoramento_nginx` está disponível neste projeto. Seguem informações sobre o script:
 
 ### O que o script faz
