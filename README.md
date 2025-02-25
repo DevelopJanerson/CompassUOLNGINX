@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/bcf1aef6-654e-46fc-904d-5c8ea3ce72fa)
+![image](https://github.com/user-attachments/assets/6accdb30-8908-47cc-9840-61a1835afec8)
 # Projeto de Monitoramento de uma instância EC2 na AWS - Compass.UOL
 
 ## Objetivo
@@ -118,18 +118,20 @@ Nesta seção, apresentamos algumas capturas de tela que demonstram o funcioname
 
 ### Página no Navegador
 
-![Imagem Navegador](https://github.com/user-attachments/assets/12d21ecb-8569-41ff-b620-25ff80f4135d)
+![Imagem Navegador](https://github.com/user-attachments/assets/7e154eeb-0170-4cd4-84b1-598327c4358f)
 
 
 ### Logs do Terminal
 Nesta próxima imagem, primeiramente mostro os logs de monitoramento que certificam que o site está online. Após isso, paro o servidor propositalmente com o comando "sudo systemctl stop nginx". Perceba que, na segunda vez em que mostro os logs de monitoramento, o site fica offline e reinicia automaticamente, sem que seja necessário executar qualquer outro comando no terminal.
 
-![Imagem Terminal](https://github.com/user-attachments/assets/f34ba610-dea6-4c74-a637-b6618fa98d4c)
+![Imagem Terminal](https://github.com/user-attachments/assets/81ee5ea7-4b46-4698-aadb-f7d107184545)
+
 
 
 ### Notificação do Discord
 
-![Imagem Discord](https://github.com/user-attachments/assets/ce729704-0576-488f-8250-963cab02b15f)
+![Imagem Discord](https://github.com/user-attachments/assets/05df187b-f726-4f89-94a5-4d777601db2d)
+
 
 ## Conclusão
-- Este projeto demonstrou a criação de um servidor web com Nginx na AWS, utilizando tecnologias como Amazon EC2 e Amazon VPC para garantir a disponibilidade do site. A automação do monitoramento e o envio de notificações para um canal do Discord proporcionam uma gestão eficaz, assegurando que o servidor esteja sempre ativo e facilitando a automação de tarefas.
+Este projeto demonstrou a criação de um servidor web com Nginx na AWS, utilizando tecnologias como Amazon EC2 e Amazon VPC para garantir a disponibilidade do site. A automação do monitoramento e o envio de notificações para um canal do Discord proporcionam uma gestão eficaz, assegurando que o servidor esteja sempre ativo e facilitando a automação de tarefas.
