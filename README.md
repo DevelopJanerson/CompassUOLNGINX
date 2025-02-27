@@ -97,21 +97,6 @@ Após a execução do script, o servidor web estará em funcionamento e monitora
   - E cole o comando que vc acabou de copiar na AWS, no campo **SSH Client**. 
       - Certifique-se de estar logado previamente na plataforma da AWS com suas credenciasis de acesso, (via terminal do Visual Studio Code). 
 
-### O que o script faz
-O script "script_monitoramento_nginx" realiza as seguintes etapas:
-
-1. **Atualização e Instalação do Nginx**: O script começa atualizando os pacotes do sistema e instalando o servidor web Nginx. Ele também habilita o Nginx para iniciar automaticamente no boot do sistema.
-
-2. **Criação da Página HTML**: Cria uma página HTML simples que fornece informações sobre o projeto, incluindo uma descrição e as tecnologias utilizadas. Esta página é armazenada em /var/www/html/index.html.
-
-3. **Script de Monitoramento**: O script cria um script de monitoramento "restart_nginx.sh" que verifica se o servidor web está online. Se o site estiver offline, o script reinicia o Nginx e envia uma notificação para um webhook do Discord, informando que o site está offline. Caso contrário, ele envia uma notificação informando que o site está online.
-
-4. **Configuração do Systemd**: O script configura um serviço do systemd "restart_nginx.service" que executa o script de monitoramento. Além disso, um timer do systemd "restart_nginx.timer" é criado para executar o monitoramento a cada minuto.
-
-5. **Finalização**: Por fim, o script recarrega o daemon do systemd, habilita e inicia o timer, completando a instalação e configuração do Nginx.
-
-Após a execução do script, o servidor web estará em funcionamento e monitorado automaticamente, com notificações enviadas para o Discord em caso de falhas.
-
 ## Testes
 
 Nesta seção, apresentamos algumas capturas de tela que demonstram o funcionamento do projeto.
